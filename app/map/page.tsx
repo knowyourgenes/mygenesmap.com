@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function MapPage() {
   const { content, decodes } = await getHomeData();
 
-  // FAQPage JSON-LD — every decode as a question/answer pair.
+  // FAQPage JSON-LD - every decode as a question/answer pair.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
