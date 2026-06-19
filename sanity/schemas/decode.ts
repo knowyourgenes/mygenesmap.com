@@ -62,6 +62,12 @@ export const decode = defineType({
         "The condensed summary shown in the full symptom-to-gene map.",
     }),
     defineField({ name: "order", type: "number", initialValue: 0 }),
+    defineField({
+      name: "publishedAt",
+      title: "Published at",
+      type: "datetime",
+      initialValue: () => new Date().toISOString(),
+    }),
   ],
   orderings: [
     {

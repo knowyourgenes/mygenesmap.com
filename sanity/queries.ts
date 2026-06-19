@@ -40,6 +40,11 @@ export const decodeIndexQuery = groq`*[_type == "decode"] | order(order asc) ${d
 
 export const decodeSlugsQuery = groq`*[_type == "decode" && defined(slug.current)][].slug.current`;
 
+export const decodeSitemapQuery = groq`*[_type == "decode" && defined(slug.current)]{
+  "slug": slug.current,
+  "publishedAt": coalesce(publishedAt, _updatedAt)
+}`;
+
 export const decodeBySlugQuery = groq`*[_type == "decode" && slug.current == $slug][0] {
   "slug": slug.current,
   chip, symptom, genes, answer, why, doThis, oneLine,
@@ -49,6 +54,11 @@ export const decodeBySlugQuery = groq`*[_type == "decode" && slug.current == $sl
 }`;
 
 export const areaSlugsQuery = groq`*[_type == "area" && defined(slug.current)][].slug.current`;
+
+export const areaSitemapQuery = groq`*[_type == "area" && defined(slug.current)]{
+  "slug": slug.current,
+  "publishedAt": coalesce(publishedAt, _updatedAt)
+}`;
 
 export const areaBySlugQuery = groq`*[_type == "area" && slug.current == $slug][0] {
   "slug": slug.current,

@@ -5,12 +5,16 @@ import {
   areasQuery,
   decodeIndexQuery,
   decodeSlugsQuery,
+  decodeSitemapQuery,
   decodeBySlugQuery,
   areaSlugsQuery,
+  areaSitemapQuery,
   areaBySlugQuery,
 } from "./queries";
 
 export type NavLink = { label: string; href: string };
+
+export type SitemapEntry = { slug: string; publishedAt: string };
 
 export type Decode = {
   slug: string;
@@ -122,6 +126,12 @@ export async function getDecodeSlugs(): Promise<string[]> {
   return (await client.fetch<string[]>(decodeSlugsQuery)) ?? [];
 }
 
+export async function getDecodeSitemap(): Promise<SitemapEntry[]> {
+  const client = getClient();
+  if (!isSanityConfigured || !client) return [];
+  return (await client.fetch<SitemapEntry[]>(decodeSitemapQuery)) ?? [];
+}
+
 export async function getDecodeBySlug(
   slug: string,
 ): Promise<DecodeFull | null> {
@@ -133,6 +143,12 @@ export async function getAreaSlugs(): Promise<string[]> {
   const client = getClient();
   if (!isSanityConfigured || !client) return [];
   return (await client.fetch<string[]>(areaSlugsQuery)) ?? [];
+}
+
+export async function getAreaSitemap(): Promise<SitemapEntry[]> {
+  const client = getClient();
+  if (!isSanityConfigured || !client) return [];
+  return (await client.fetch<SitemapEntry[]>(areaSitemapQuery)) ?? [];
 }
 
 export async function getAreaBySlug(
